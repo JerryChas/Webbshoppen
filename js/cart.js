@@ -24,12 +24,26 @@ emptyCart.addEventListener('click', () => {
 
 function renderCartItems() {
     const productCards = cart.map((p) => {
-        return `
-                  <div class="product-card">
-                  <h3>${p.name}</h3>
-                  <p>Price: ${p.price} kr</p>
-                  </div>
-                  `;
+        // return `
+        //           <div class="product-card">
+        //           <h3>${p.name}</h3>
+        //           <p>Price: ${p.price} kr</p>
+        //           </div>
+        //           `;
+
+        if (p && p.name && p.price) {
+            return `
+                <div class="product-card">
+                    <h3>${p.name}</h3>
+                    <p>Price: ${p.price} kr</p>
+                </div>
+            `;
+        } else {
+            // Hantera fallet där produkten saknar nödvändiga egenskaper
+            console.error('Ogiltig produkt i varukorgen:', p);
+            return '';
+        }
+
     });
     productContainer.innerHTML = productCards.join('');
 

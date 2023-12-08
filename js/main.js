@@ -30,17 +30,22 @@ console.log(categories);
 const filterbtnsCategories = categories.map((c)=>{
     return `<li id="${c}">${c}</li>`
 })
-document.getElementById('filter-btns').innerHTML = filterbtnsCategories.join('');
+document.getElementById('filter-btns').innerHTML += filterbtnsCategories.join('');
 console.log(filterbtnsCategories);
 
 
 
 //Kontrollerar vilken knapp som klickas på 
-let clickedCategories = "all"; 
-filterbtns.addEventListener("click", function(event){
-    clickedCategories = event.target.textContent;
-    renderCards();
-    console.log(clickedCategories);
+let clickedCategories = "Visa alla produkter"; 
+filterbtns.addEventListener("click", function(e){
+    
+    if (e.target.tagName === "LI") {
+        clickedCategories = e.target.textContent;
+        renderCards();
+        console.log(clickedCategories); 
+    }
+    
+   
 })
 
 // Rendera produkter på sidan från start
@@ -58,6 +63,8 @@ productContainer.addEventListener('click', (e) => {
     //lagrar varukorgens innehåll i localstorage
     localStorage.setItem("cart", JSON.stringify(cart));
     }
+
+    
     
 })
 
@@ -65,7 +72,7 @@ productContainer.addEventListener('click', (e) => {
 //Rendera producter på sidan
 function renderCards(){
     const productCards = products.map((p) => {
-    if (clickedCategories === "all"){
+        if (clickedCategories === "Visa alla produkter"){
        return  `
               <div class="product-card">
               <h3>${p.name}</h3>
