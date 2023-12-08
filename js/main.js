@@ -1,5 +1,6 @@
-let filterbtns = document.getElementById('filter-btns');
+const filterbtns = document.getElementById('filter-btns');
 const productContainer = document.getElementById("product-container");
+const cart = [];
 /* 
 Ni väljer om ni använder produktdatan i js eller json och om ni vill lägga till 
 fler properties som bilder etc.
@@ -15,7 +16,8 @@ const products = [
     { id: 4, name: 'Mobiltelefon', category: 'elektronik', price: 500 }
 ];
 
-const cart = [];
+
+
 //plockat ut de kategorier som finns och lagrat i en array.
 const categories = products.reduce((category, product) => {
     if(!category.includes(product.category)) category.push(product.category);
@@ -31,6 +33,8 @@ const filterbtnsCategories = categories.map((c)=>{
 document.getElementById('filter-btns').innerHTML = filterbtnsCategories.join('');
 console.log(filterbtnsCategories);
 
+
+
 //Kontrollerar vilken knapp som klickas på 
 let clickedCategories = "all"; 
 filterbtns.addEventListener("click", function(event){
@@ -42,6 +46,16 @@ filterbtns.addEventListener("click", function(event){
 // Rendera produkter på sidan från start
 renderCards();
 
+//lägger till produkt i varukorg
+productContainer.addEventListener('click', (e) => {
+    // console.log(e)
+    // console.log(e.target.id);
+    
+    cart.push(products[(e.target.id)-1]);
+    console.table(cart);
+})
+
+
 //Rendera producter på sidan
 function renderCards(){
     const productCards = products.map((p) => {
@@ -51,7 +65,7 @@ function renderCards(){
               <h3>${p.name}</h3>
               <p>Price: ${p.price} kr</p>
               <h4>category: ${p.category}</h4>
-              <button class="add-to-cart_btn">Add to cart</button>
+              <button id="${p.id}"class="add-to-cart_btn">Add to cart</button>
               </div>
               `;
     } else if (clickedCategories === p.category){
@@ -69,7 +83,6 @@ return `
     
 })
 productContainer.innerHTML = productCards.join('');
-
 
 };
 
