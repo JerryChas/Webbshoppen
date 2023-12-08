@@ -1,4 +1,5 @@
 //Hämta produkter från local storage
+const totalPrice = document.getElementById('total-price')
 const productContainer = document.getElementById('product-container');
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
@@ -33,3 +34,9 @@ const productCards = cart.map((p) => {
 
 }
 
+
+sumPrice = cart.reduce((accu, item) => {
+    return accu + item.price
+}, 0) 
+console.log(sumPrice)
+totalPrice.textContent = sumPrice;
