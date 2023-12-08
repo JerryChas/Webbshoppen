@@ -1,6 +1,6 @@
 const filterbtns = document.getElementById('filter-btns');
 const productContainer = document.getElementById("product-container");
-const cart = [];
+const cart = JSON.parse(localStorage.getItem("cart")) || [];
 /* 
 Ni väljer om ni använder produktdatan i js eller json och om ni vill lägga till 
 fler properties som bilder etc.
@@ -48,11 +48,17 @@ renderCards();
 
 //lägger till produkt i varukorg
 productContainer.addEventListener('click', (e) => {
-    // console.log(e)
+    // console.log(e);
     // console.log(e.target.id);
-    
-    cart.push(products[(e.target.id)-1]);
+    //if eventtyptarget = button då gör vi detta
+    if(e.target.tagName === "BUTTON"){
+        cart.push(products[(e.target.id)-1]);
     console.table(cart);
+
+    //lagrar varukorgens innehåll i localstorage
+    localStorage.setItem("cart", JSON.stringify(cart));
+    }
+    
 })
 
 
