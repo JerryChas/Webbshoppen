@@ -1,3 +1,5 @@
+let filterbtns = document.getElementById('filter-btns');
+const productContainer = document.getElementById("product-container");
 /* 
 Ni väljer om ni använder produktdatan i js eller json och om ni vill lägga till 
 fler properties som bilder etc.
@@ -23,8 +25,28 @@ const categories = products.reduce((category, product) => {
 console.log(categories);
 
 //Skriver ut filterknappar på sidan
-const filterbtns = categories.map((c)=>{
-    return `<li>${c}</li>`
+const filterbtnsCategories = categories.map((c)=>{
+    return `<li id="${c}">${c}</li>`
 })
-document.getElementById('filter-btns').innerHTML = filterbtns.join('');
-console.log(filterbtns);
+document.getElementById('filter-btns').innerHTML = filterbtnsCategories.join('');
+console.log(filterbtnsCategories);
+
+//Kontrollerar vilken knapp som klickas på 
+let clicked; 
+filterbtns.addEventListener("click", function(event){
+    clicked = event.target.textContent;
+
+    console.log(clicked);
+})
+
+
+//Rendera producter på sidan
+
+
+
+// if (clicked === 'kläder'){
+    
+// } else {
+    
+// }
+
