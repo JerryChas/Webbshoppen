@@ -14,3 +14,10 @@ const products = [
 ];
 
 const cart = [];
+
+const categories = products.reduce((category, product) => {
+    if(!category.includes(product.category)) category.push(product.category);
+    return category;
+},[])
+
+console.log(categories)
