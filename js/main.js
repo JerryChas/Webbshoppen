@@ -32,15 +32,46 @@ document.getElementById('filter-btns').innerHTML = filterbtnsCategories.join('')
 console.log(filterbtnsCategories);
 
 //Kontrollerar vilken knapp som klickas på 
-let clicked; 
+let clickedCategories = "all"; 
 filterbtns.addEventListener("click", function(event){
-    clicked = event.target.textContent;
-
-    console.log(clicked);
+    clickedCategories = event.target.textContent;
+    renderCards();
+    console.log(clickedCategories);
 })
 
+// Rendera produkter på sidan från start
+renderCards();
 
 //Rendera producter på sidan
+function renderCards(){
+    const productCards = products.map((p) => {
+    if (clickedCategories === "all"){
+       return  `
+              <div class="product-card">
+              <h3>${p.name}</h3>
+              <p>Price: ${p.price} kr</p>
+              <h4>category: ${p.category}</h4>
+              <button class="add-to-cart_btn">Add to cart</button>
+              </div>
+              `;
+    } else if (clickedCategories === p.category){
+return `
+              <div class="product-card">
+              <h3>${p.name}</h3>
+              <p>Price: ${p.price} kr</p>
+              <h4>category: ${p.category}</h4>
+              <button class="add-to-cart_btn">Add to cart</button>
+              </div>
+              `;
+    } 
+    
+
+    
+})
+productContainer.innerHTML = productCards.join('');
+
+
+};
 
 
 
