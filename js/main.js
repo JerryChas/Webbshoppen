@@ -14,10 +14,17 @@ const products = [
 ];
 
 const cart = [];
-
+//plockat ut de kategorier som finns och lagrat i en array.
 const categories = products.reduce((category, product) => {
     if(!category.includes(product.category)) category.push(product.category);
     return category;
 },[])
 
-console.log(categories)
+console.log(categories);
+
+//Skriver ut filterknappar på sidan
+const filterbtns = categories.map((c)=>{
+    return `<li>${c}</li>`
+})
+document.getElementById('filter-btns').innerHTML = filterbtns.join('');
+console.log(filterbtns);
